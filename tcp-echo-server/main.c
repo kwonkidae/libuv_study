@@ -21,7 +21,7 @@ void free_write_req(uv_write_t *req) {
 }
 
 void alloc_buffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf) {
-  printf("%lu", suggested_size);
+  fprintf(stderr, "%lu", suggested_size);
   buf->base = (char*)malloc(suggested_size);
   buf->len = suggested_size;
 }
