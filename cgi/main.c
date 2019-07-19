@@ -24,13 +24,14 @@ void invoke_cgi_script(uv_tcp_t *client) {
 	args[0] = path;
 	args[1] = NULL;
 
-	// options.stdio_count = 3;
-	// uv_stdio_container_t child_stdio[3];
-	// child_stdio[0].flags = UV_IGNORE;
-	// child_stdio[1].flags = UV_INHERIT_STREAM;
-	// child_stdio[1].data.stream = (uv_stream_t*)client;
-	// child_stdio[2].flags = UV_IGNORE;
-	// options.stdio = child_stdio;
+	options.stdio_count = 3;
+	uv_stdio_container_t child_stdio[3];
+	child_stdio[0].flags = UV_IGNORE;
+	child_stdio[1].flags = UV_INHERIT_STREAM;
+	// child_stdio[1].data.fd = 1;
+	child_stdio[1].data.stream = (uv_stream_t*)client;
+	child_stdio[2].flags = UV_IGNORE;
+	options.stdio = child_stdio;
 
 	options.exit_cb = cleanup_handles;
 	options.file = args[0];
