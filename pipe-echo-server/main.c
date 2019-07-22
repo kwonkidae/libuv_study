@@ -63,6 +63,7 @@ void on_new_connection(uv_stream_t *server, int status) {
   if (status == -1) {
     return;
   }
+  fprintf(stderr, "new connect\n");
   uv_pipe_t *client = (uv_pipe_t*)malloc(sizeof(uv_pipe_t));
   uv_pipe_init(loop, client, 0);
   if (uv_accept(server, (uv_stream_t*)client) == 0) {
